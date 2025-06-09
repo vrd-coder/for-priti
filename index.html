@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For You, Priti 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: #ffe6f0;
+      font-family: 'Poppins', sans-serif;
+      color: #4a235a;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      justify-content: center;
+    }
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+      max-width: 450px;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+    h1 {
+      font-weight: 600;
+      font-size: 2.2em;
+      margin-bottom: 10px;
+      color: #d6336c; /* pink headings */
+    }
+    p {
+      font-weight: 400;
+      font-size: 1.1em;
+      margin-bottom: 15px;
+      min-height: 1.5em; /* prevent jumping */
+      white-space: pre-wrap;
+    }
+    #line4 b {
+      font-weight: 600;
+    }
+    .gif {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin: 15px 0;
+    }
+    .buttons {
+      margin-top: 20px;
+      position: relative;
+      height: 60px;
+    }
+    button {
+      background: #ff6699;
+      border: none;
+      padding: 12px 25px;
+      margin: 0 10px;
+      font-size: 1.1em;
+      border-radius: 30px;
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(255, 102, 153, 0.5);
+      transition: background 0.3s ease, transform 0.2s ease;
+      position: relative;
+    }
+    button:hover {
+      background: #e94c81;
+      transform: scale(1.05);
+    }
+    #noBtn {
+      background: #ff9aa2;
+    }
+    #noBtn:hover {
+      background: #e87f8f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="confessBox">
+    <h1>For You, Priti 💖</h1>
+    <img class="gif" src="file-NrHL4EEt2uouaWwJj2vwFW" alt="Confession GIF" />
+    
+    <p id="line1"></p>
+    <p id="line2"></p>
+    <p id="line3"></p>
+    <p id="line4"></p>
+
+    <div class="buttons">
+      <button onclick="sayYes()">Yes 💗</button>
+      <button id="noBtn" onclick="handleNo(event)">No 💔</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+
+    function sayYes() {
+      document.body.innerHTML = `
+        <div class="container" style="background:#fff0f6;">
+          <h1>Arigatoooooooooo!!🥹🩷🫶🏻</h1>
+          <img class="gif" src="file-4UnV6uTF9KbrDzTa4sfBH8" alt="Kiss GIF" />
+          <p>Priti, I'll always cherish you and be by your side 💕</p>
+          <p>You’re the most special person to me 🫶🏻</p>
+        </div>
+      `;
+    }
+
+    function handleNo(e) {
+      const container = document.querySelector('.container');
+      const maxX = container.offsetWidth - noBtn.offsetWidth - 20;
+      const maxY = container.offsetHeight - noBtn.offsetHeight - 20;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    function typeMessage(elementId, message, speed = 50, callback) {
+      const element = document.getElementById(elementId);
+      let i = 0;
+      element.textContent = '';
+
+      function type() {
+        if (i < message.length) {
+          element.textContent += message.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          if (callback) callback();
+        }
+      }
+      type();
+    }
+
+    window.onload = () => {
+      const messages = [
+        {id: 'line1', text: 'Hey Priti,'},
+        {id: 'line2', text: 'Main ye sab dino se soch raha tha, and finally made this for you 🥹'},
+        {id: 'line3', text: "You're kind, sweet, and genuinely special... and I think I really like you 💗"},
+        {id: 'line4', text: "Will you be my love? 🫶🏻💞", isHtml: true}
+      ];
+
+      let current = 0;
+
+      function typeNext() {
+        if (current >= messages.length) return;
+        const msg = messages[current];
+        const element = document.getElementById(msg.id);
+        element.textContent = '';
+        
+        let i = 0;
+
+        function typeChar() {
+          if (i < msg.text.length) {
+            element.textContent += msg.text.charAt(i);
+            i++;
+            setTimeout(typeChar, 50);
+          } else {
+            current++;
+            setTimeout(typeNext, 300);
+          }
+        }
+
+        typeChar();
+      }
+
+      typeNext();
+    };
+  </script>
+</body>
+</html>
